@@ -16,7 +16,7 @@
                     <th>Code</th>
                     <th>Nome</th>
                     <th>quantidade Alunos</th>
-                    <th>Curso</th>
+                    <th>planoEstagio</th>
                     <th>estatus</th>
                     <th>Opções</th>
                 </tr>
@@ -27,8 +27,8 @@
             <tr>
                 <td>{{$turma->id}}</td>
                 <td>{{$turma->nome}}</td>
-                <td>{{$turma->alunos->count()}}/{{$turma->qtd_aluno}}</td>
-                <td>{{$turma->curso->nome}}</td>
+                <td>{{$turma->estagiarios->count()}}/{{$turma->qtd_estagiarios}}</td>
+                <td>{{$turma->planoEstagio->nome}}</td>
                 <td>{{$turma->estatus}}</td>
                 <td>
                     <div class="flex gap-2">
@@ -74,13 +74,13 @@
                             <x-bladewind::input numeric=true label='numero maximo de alunos' name='qtd_aluno' min=8 value="{{ $turma->qtd_aluno}}" />
                             {{-- end --}}
                             <x-bladewind::card>
-                                <h1 class="">Cursos</h1>
+                                <h1 class="">planoEstagios</h1>
                                 <div class="flex flex-wrap p-2">
-                                    @foreach($cursos as $item)
-                                    @if($item->id ==$turma->curso_id)
-                                    <x-bladewind::radio label="{{ $item->nome }}" value="{{$item->id}}" name='curso' checked=true />
+                                    @foreach($planoEstagios as $item)
+                                    @if($item->id ==$turma->plano_estagio_id)
+                                    <x-bladewind::radio label="{{ $item->nome }}" value="{{$item->id}}" name='planoEstagio' checked=true />
                                     @else
-                                    <x-bladewind::radio label="{{ $item->nome }}" value="{{$item->id}}" name='curso' />
+                                    <x-bladewind::radio label="{{ $item->nome }}" value="{{$item->id}}" name='planoEstagio' />
                                     @endif
                                     @endforeach
                                 </div>
@@ -111,10 +111,10 @@
                             <x-bladewind::input numeric=true label='numero maximo de alunos' name='qtd_aluno' min=8 />
                             {{-- end --}}
                             <x-bladewind::card>
-                                <h1 class="">Cursos</h1>
+                                <h1 class="">planoEstagios</h1>
                                 <div class="flex flex-wrap p-2">
-                                    @foreach($cursos as $item)
-                                    <x-bladewind::radio label="{{ $item->nome }}" value="{{$item->id}}" name='curso' />
+                                    @foreach($planoEstagios as $item)
+                                    <x-bladewind::radio label="{{ $item->nome }}" value="{{$item->id}}" name='planoEstagio' />
                                     @endforeach
                                 </div>
                             </x-bladewind::card>

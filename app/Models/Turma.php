@@ -8,14 +8,14 @@ class Turma extends Model
 
 
 
-    protected $fillable=['nome','qtd_aluno','cursos_id'];
+    protected $fillable=['nome','qtd_estagiarios','plano_estagio_id'];
     
-    public function alunos()
+    public function estagiarios()
     {
-        return $this->belongsToMany(Aluno::class);
+        return $this->belongsToMany(Estagiario::class, 'estagiario_turma', 'turma_id', 'estagiario_id');
     }
-    public function curso()
+    public function planoEstagio()
     {
-        return $this->belongsTo(Curso::class);
+        return $this->belongsTo(PlanoEstagio::class);
     }
 }

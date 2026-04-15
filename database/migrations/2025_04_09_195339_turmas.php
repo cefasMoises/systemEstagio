@@ -12,9 +12,9 @@ return new class extends Migration
 
             $table->id();
             $table->string('nome')->unique();
-            $table->integer('qtd_aluno');
+            $table->integer('qtd_estagiarios');
             $table->enum('estatus',['DECORRENTE','FINALIZADO','CANCELLADO'])->default('DECORRENTE');
-            $table->foreignId('curso_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('plano_estagio_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
 
         });

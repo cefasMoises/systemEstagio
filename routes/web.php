@@ -170,7 +170,7 @@ Route::middleware([Secretaria::class, UsuarioLogado::class])->prefix('/turmas')-
 
     Route::get('/', [TurmaController::class, 'index']);
     Route::post('/criar', [TurmaController::class, 'create']);
-    Route::get('/alunos/{id}', [TurmaController::class, 'show']);
+    Route::get('/estagiarios/{id}', [TurmaController::class, 'show']);
     Route::post('/atualizar', [TurmaController::class, 'update']);
     Route::post('/enturmar', [TurmaController::class, 'store']);
     Route::get('/deletar/{id}', [TurmaController::class, 'delete']);

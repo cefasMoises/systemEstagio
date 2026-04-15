@@ -106,7 +106,13 @@
 
                                 {{-- gerar recibo --}}
 
-                                <div class="flex items-center justify-end mt-4">
+
+                                <div class="flex flex-col mt-4">
+
+                                    <strong>
+                                        Fatura:
+                                    </strong>
+
                                     @if(!$pagamento->fatura)
 
                                         <form action="/pagamentos/{{ $pagamento->id }}" action="get" target="_blank">
@@ -114,7 +120,7 @@
                                         </form>
 
                                     @else
-                                        <a href="{{ asset('recibos/' . $pagamento->fatura) }}" target="_blank">
+                                        <a href="{{ asset('/recibos/' . $pagamento->fatura) }}" target="_blank"  class="flex items-center gap-1 text-indigo-500 hover:underline">
                                             <i class="bi bi-eye"></i>
                                             {{ $pagamento->fatura }}
 
