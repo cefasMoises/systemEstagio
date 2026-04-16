@@ -28,9 +28,9 @@ class TurmaController extends Controller
             foreach ($estagiarios_turma as $estagiario) {
 
 
-                if ($estagiario->planoEstagio()->get()[0]->id != $plano_estagio_turma_id) {
+                if ($estagiario->plano()->get()[0]->id != $plano_estagio_turma_id) {
 
-                    $turma->estagiarios()->detach($estagiario->planoEstagio()->get()[0]->id);
+                    $turma->estagiarios()->detach($estagiario->plano()->get()[0]->id);
 
                 }
             }
@@ -49,7 +49,7 @@ class TurmaController extends Controller
         $estagiarios_sem_turma = [];
 
 
-    
+
 
         foreach ($estagiarios as $aluno) {
 
@@ -68,32 +68,42 @@ class TurmaController extends Controller
     public function store(Request $dados)
     {
 
-        if ($dados->item == null)
-            return redirect()->back()->with('error', 'nenhum aluno selecionado');
+        // return $dados;
+
+        $validator = Validator::make($dados->all(), [
+            'id' => 'required|exists:turmas,id',
+            'item' => 'required|array',
+            'item.*' => 'exists:estagiarios,id'
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->with("error", $validator->errors()->first());
+        }
+
+
 
         $turma_selecionado = Turma::find($dados->id);
-        $limit = $turma_selecionado->qtd_aluno;
+        $limit_estagiarios = $turma_selecionado->qtd_estagiarios;
 
 
         foreach ($dados->item as $id) {
 
-            $estagiarios_turma_qtd = $turma_selecionado->estagiarios()->count();
+            $qtd_estagiarios_turma = $turma_selecionado->estagiarios()->count();
 
+            if ($qtd_estagiarios_turma < $limit_estagiarios) {
 
-            if ($estagiarios_turma_qtd < $limit) {
-
-                $aluno = Aluno::find($id);
+                $aluno = Estagiario::find($id);
                 $turma_selecionado->estagiarios()->attach($aluno);
                 $turma_selecionado->save();
+
             } else {
 
-
-                return redirect()->back()->with('error', "não foi possivel adicionar todos o aluno na turma devido ao liminte maximo de estagiarios!");
+                return redirect()->back()->with('error', "não foi possivel adicionar  na turma devido ao liminte maximo de estagiarios!");
             }
 
         }
-
-
 
 
         return redirect()->back()->with('sucess', "novos estagiarios adicionados na turma com sucesso!");
@@ -130,8 +140,6 @@ class TurmaController extends Controller
             "Turma criada e estagiarios adicionados com sucesso!"
         );
     }
-
-
 
     public function delete($id)
     {

@@ -112,7 +112,7 @@
                     <div>
                         <label for="documentos"
                             class="block text-sm font-medium text-slate-600 mb-1">documentos(*curriculo)</label>
-                        <x-bladewind::filepicker name="documentos" accepted_file_types='image/*,.pdf' max_file_size='10mb'
+                        <x-bladewind::filepicker name="documentos" accepted_file_types='application/pdf' max_file_size='10mb'
                             placeholder="Foto passe" required />
                     </div>
 

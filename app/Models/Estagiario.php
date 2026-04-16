@@ -40,4 +40,9 @@ class Estagiario extends Model
     {
         return $this->belongsTo(PlanoEstagio::class, 'plano_estagio_id');
     }
+    public function notas()
+    {
+
+        return $this->hasMany(Nota::class);
+    }
 }

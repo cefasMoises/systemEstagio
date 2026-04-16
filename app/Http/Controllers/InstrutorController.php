@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Curso;
 use App\Models\Instrutor;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Validator;
 
 class InstrutorController extends Controller
 {
@@ -36,9 +38,6 @@ class InstrutorController extends Controller
     }
     public function index()
     {
-
-
-
         $instrutores = Instrutor::all();
 
         return view("main.instrutores", ['instrutores' => $instrutores]);
@@ -73,53 +72,95 @@ class InstrutorController extends Controller
     {
 
 
-        if ($dados->all() != null) {
+        $validator = Validator::make($dados->all(), [
+            'nome' => 'required',
+            'bi' => 'required|unique:instrutores,bi',
+            'tel' => 'required|digits:9',
+            'sexo' => 'required',
+            'especialidade' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg',
+            'documentos' => 'required|file|mimes:pdf|max:2048',
+            'curso' => 'required|exists:cursos,id',
+        ]);
 
-            $curso = Curso::find($dados->curso);
-
-            if ($curso == null) redirect()->back()->with('error', 'ocorreu um erro, verifique o curso');
-
-
-
-
-            $novo_instrutor = $this->preencherDados(new Instrutor(), $dados);
-
-
-
-            if ($novo_instrutor->save()) {
-
-                $novo_instrutor->cursos()->attach($curso);
-                return redirect()->back()->with("sucess", "novo instrutor registrado com sucesso!");
-            } else return redirect()->back()->with("error", "não foi possivel registrar um novo instrutor");
-
-
-            return redirect()->back();
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
         }
+
+
+
+        $foto = $dados->file('foto');
+        $fotoNome = $this->uploadFicheiro($foto);
+
+        $documentos = $dados->file('documentos');
+        $documentosNome = $this->uploadFicheiro($documentos);
+
+
+        $curso = Curso::find($dados->curso);
+        $novo_instrutor = Instrutor::create([
+            'nome' => $dados->nome,
+            'email' => $dados->email,
+            'bi' => $dados->bi,
+            'tel' => $dados->tel,
+            'sexo' => $dados->sexo,
+            'especialidade' => $dados->especialidade,
+            'foto' => $fotoNome,
+            'documentos' => $documentosNome,
+        ]);
+
+
+        $novo_instrutor->cursos()->attach($curso);
+        return redirect()->back()->with("sucess", "novo instrutor registrado com sucesso!");
+
+
     }
     public function update(Request $dados)
     {
 
+        $validator = Validator::make($dados->all(), [
+            "id" => "required|exists:instrutores,id",
+            'nome' => 'required',
+            'bi' => 'required|unique:instrutores,bi,' . $dados->id,
+            'tel' => 'required|digits:9',
+            'sexo' => 'required',
+            'especialidade' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg',
+            'documentos' => 'required|file|mimes:pdf|max:2048',
+            'curso' => 'required|exists:cursos,id',
+        ]);
 
-        // Encontra o instrutor pelo ID
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
+        }
+
         $curso = Curso::find($dados->curso);
-
         $instrutor = Instrutor::find($dados->id);
 
-        if ($instrutor == null) return redirect()->back()->with('error', 'ocorreu um erro!');
+        $fotoNome = $this->uploadFicheiro($dados->file('foto'));
+        $documentosNome = $this->uploadFicheiro($dados->file('documentos'));
 
-        $instrutor = $this->preencherDados($instrutor, $dados);
+        $instrutor->update(
+            [
+                'nome' => $dados->nome,
+                'email' => $dados->email,
+                'bi' => $dados->bi,
+                'tel' => $dados->tel,
+                'sexo' => $dados->sexo,
+                'especialidade' => $dados->especialidade,
+                'foto' => $fotoNome,
+                'documentos' => $documentosNome
+            ]
+        );
 
 
-        if ($instrutor->update()) {
+        if ($curso->id != $instrutor->cursos()->first()->id) {
 
             $instrutor->cursos()->detach($instrutor->cursos()->get()[0]);
             $instrutor->cursos()->attach($curso);
 
-            return redirect()->back()->with("sucess", "instrutor atalizado com sucesso!");
-        } else return redirect()->back()->with("error", "não foi possivel atualizar o  instrutor");
+        }
 
-
-        return redirect()->back();
+        return redirect()->back()->with("sucess", "instrutor atalizado com sucesso!");
     }
     public function delete($id)
     {
@@ -132,5 +173,12 @@ class InstrutorController extends Controller
             $instrutor->delete();
             return redirect()->back()->with('sucess', 'instrutor deletado');
         }
+    }
+
+    private function uploadFicheiro(UploadedFile $file, $dir = 'uploads'): string
+    {
+        $name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs($dir, $name, 'public');
+        return $dir . '/' . $name;
     }
 }

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nota extends Model
 {
-    public function aluno()
+    public function estagiario()
     {
-        return $this->belongsTo(Aluno::class);
+        return $this->belongsTo(Estagiario::class);
     }
 }

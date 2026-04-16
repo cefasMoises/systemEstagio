@@ -16,6 +16,7 @@
                   
                     <!-- Nome -->
                     <input type="hidden" value="{{$instrutor->id}}" name='id'>
+
                     <div>
                         <label for="nome" class="block text-sm font-medium text-slate-600 mb-1">Nome</label>
                         <div class="flex items-center border border-slate-300 rounded">
@@ -108,25 +109,30 @@
                     <div>
                         <label for="foto" class="block text-sm font-medium text-slate-600 mb-1">Foto (Passe)</label>
                         <x-bladewind::filepicker name="foto" accepted_file_types='image/*' max_file_size='10mb'
-                            placeholder="Foto passe" selected_value="{{asset('uploads/'.$instrutor->foto)}}" />
+                            placeholder="Foto passe" selected_value="{{asset('storage/'.$instrutor->foto)}}" />
                      
                     </div>
 
                     <!-- Documentos -->
                     <div>
                         <label for="documentos" class="block text-sm font-medium text-slate-600 mb-1">Documentos (Currículo)</label>
-                        <x-bladewind::filepicker name="documentos" accepted_file_types='image/*,.pdf' max_file_size='10mb'
-                            placeholder="Currículo ou documentos" selected_value="{{asset('uploads/'.$instrutor->documentos)}}" />
+
+                        <x-bladewind::filepicker name="documentos" accepted_file_types='application/pdf' max_file_size='10mb'
+                            placeholder="Currículo ou documentos" selected_value="{{asset('storage/'.$instrutor->documentos)}}" />
+
                         @if ($instrutor->documentos)
-                            <small class="text-sm text-slate-500 mt-1">Documento atual: {{ $instrutor->documentos }}</small>
+                            <a href="{{ asset('storage/'.$instrutor->documentos) }}" class="ui-link" target="_blank" class="text-sm text-slate-500 mt-1">{{ $instrutor->documentos }}</a>
                         @endif
+
                     </div>
 
                     <!-- Botões -->
                     <div class="flex justify-end gap-4 mt-4">
                         <x-bladewind::button can_submit='true'>Confirmar</x-bladewind::button>
                     </div>
+
                 </form>
+
             </x-bladewind::card>
         @else
             <x-bladewind::card>

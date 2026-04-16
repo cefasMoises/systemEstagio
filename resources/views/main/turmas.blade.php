@@ -13,7 +13,7 @@
             <x-bladewind::table has_border=true searchable=true>
                 <x-slot name='header'>
                     <tr class="text-center">
-                        <th>Code</th>
+                        <th>indice</th>
                         <th>Nome</th>
                         <th>quantidade estagiarios</th>
                         <th>Curso</th>

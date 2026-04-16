@@ -10,31 +10,55 @@
             </div>
         </x-bladewind::card>
 
-        <x-bladewind::card class="rounded-none">
-            @forelse ($cursos as $curso)
-                <x-bladewind::card>
-                    <h1 class="text-slate-500 text-center bi bi-collection-fill"> {{ $curso->nome }}</h1>
+        <div class="p-2">
+            @forelse ($planos as $plano)
+                <div class="flex flex-col">
 
-                    @foreach ($curso->turmas as $turma)
-                        <a class="flex items-center justify-between gap-2 m-2 rounded p-2 text-blue-500 bg-slate-500/10"
-                            href="/desempenho/{{ $turma->id }}">
-                            <h1 class="capitalize mr-auto bi bi-door-closed-fill">{{ $turma->nome }}</h1>
+                    <h1 class="bg-green-100 text-center p-2">Plano de Estagio/{{ $plano->nome }}</h1>
 
-                            <x-bladewind::progress-circle
-                                size="tiny"
-                                percentage="{{ $turma->alunos->count() }}"
-                                color="green"
-                                show_label="true"
-                            />
-                        </a>
-                    @endforeach
-                </x-bladewind::card>
+                    <ul>
+                        @php
+                            $count = 1;
+                        @endphp
+
+                        @forelse ($plano->turmas as $turma)
+
+                            <li class="even:bg-yellow-200 odd:bg-yellow-100 px-2 py-1">
+                                <a class="flex items-center justify-between ui-link " href="/desempenho/{{ $turma->id }}"
+                                    title="turma">
+
+                                    <div class="flex items-center gap-4">
+                                        <span>{{"#" . $count++ }}</span>
+                                        <span>Turma:</span>
+                                        <h1 class="">{{ $turma->nome }}</h1>
+                                    </div>
+
+
+                                    <div>
+                                        <span>{{ $turma->created_at }}</span>
+                                    </div>
+
+                                </a>
+                            </li>
+
+
+                        @empty
+                            <li>
+                                <p class="text-center text-slate-400 px-2 py-1">Nenhuma turma disponível.</p>
+                            </li>
+                        @endforelse
+                    </ul>
+                </div>
+
+
             @empty
-                <x-bladewind::card>
-                    <p class="text-center text-slate-400">Nenhum curso disponível.</p>
-                </x-bladewind::card>
+
+                <x-bladewind::alert type='warning'>para companhar o desempenho dos estagiários, é necessário criar um plano de estágio e adiciona-los às turmas.</x-bladewind::alert>
+                <x-bladewind.card>
+                    <x-empty-state></x-empty-state>
+                </x-bladewind.card>
             @endforelse
-        </x-bladewind::card>
+        </div>
 
     </div>
 @endsection

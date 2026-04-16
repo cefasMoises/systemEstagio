@@ -24,16 +24,16 @@
                         </tr>
                     </x-slot>
 
-                    @foreach ($turma->alunos()->get() as $aluno)
+                    @foreach ($turma->estagiarios()->get() as $estagiario)
                         @php
-                            $notas = $aluno->notas()->take(3)->get(); // pega as 3 notas
+                            $notas = $estagiario->notas()->take(3)->get(); // pega as 3 notas
                             $somaNotas = $notas->sum('valor');
                             $media = $notas->count() > 0 ? $somaNotas / $notas->count() : 0;
                         @endphp
 
                         <tr>
-                            <td>{{ $aluno->id }}</td>
-                            <td>{{ $aluno->nome }}</td>
+                            <td>{{ $estagiario->id }}</td>
+                            <td>{{ $estagiario->nome }}</td>
 
                             @foreach ($notas as $nota)
                                 <td>

@@ -15,4 +15,9 @@ class PlanoEstagio extends Model
     {
         return $this->hasMany(Estagiario::class);
     }
+
+    public function turmas()
+    {
+        return $this->hasMany(Turma::class);
+    }
 }
