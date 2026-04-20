@@ -7,7 +7,7 @@
     <style>
         @page {
             size: A4;
-            margin: 30mm 20mm 25mm 20mm; /* top, right, bottom, left */
+            margin: 30mm 20mm 25mm 20mm;
         }
 
         body {
@@ -92,7 +92,7 @@
         <!-- Cabeçalho -->
         <div class="header">
             <h1>instituto medio politecnico do Bengo </h1>
-            <p>NIF: 123456789 | Luanda – Angola</p>
+            <p>NIF: 123456789 | Bengo – Angola</p>
             <p>Email: bengo@escola.com | Tel: +244 999 999 999</p>
         </div>
 
@@ -103,11 +103,11 @@
         <div class="content">
             Certificamos que o(a) estagiario(a) <span class="highlight">{{ $estagiario->nome }}</span>,
             portador(a) do número de processo <span class="highlight">{{ $estagiario->id }}</span>,
-            concluiu com aproveitamento o curso de
-            <span class="highlight">{{ $estagiario->planoEstagio->first()->nome ?? 'N/A' }}</span>,
+            concluiu com aproveitamento o plano de estágio de
+            <span class="highlight">{{ $estagiario->plano->nome ?? 'N/A' }}</span>,
             ministrado nesta instituição, tendo alcançado a média final de
             <span class="highlight">
-                {{ number_format($estagiario->notas()->get()->sum('valor') / max(1, $estagiario->notas()->count()), 1) }}
+                {{ number_format($estagiario->notas()->get()->sum('valor') / max(1, $estagiario->notas()->count()), 0) }}
             </span>.
             <br><br>
             Emitimos o presente certificado para os devidos fins legais.
@@ -115,7 +115,7 @@
 
         <!-- Data -->
         <div class="issue-date">
-            Luanda, {{ now()->format('d') }} de {{ now()->translatedFormat('F') }} de {{ now()->format('Y') }}.
+            Bengo, {{ now()->format('d') }} de {{ now()->translatedFormat('F') }} de {{ now()->format('Y') }}.
         </div>
 
         <!-- Assinaturas -->

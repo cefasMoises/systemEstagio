@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aluno;
+
+use App\Models\Estagiario;
 use App\Models\Turma;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -16,10 +17,11 @@ class CertificadosController extends Controller
     {
 
 
-        $aluno = Aluno::find($id);
-        if ($aluno) {
-            $pdf = Pdf::loadView('pdf.certificado', ['aluno' => $aluno]);
-            return $pdf->stream($aluno->created_at);
+        $estagiario = Estagiario::with('plano')->find($id);
+
+        if ($estagiario) {
+            $pdf = Pdf::loadView('pdf.certificado', ['estagiario' => $estagiario]);
+            return $pdf->stream($estagiario->created_at);
         }
         return redirect()->back();
     }

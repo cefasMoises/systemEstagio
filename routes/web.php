@@ -109,8 +109,6 @@ Route::middleware([Secretaria::class])->prefix("/estagiarios")->group(function (
     Route::post('/deletar', [EstagiariosController::class, 'delete']);
 });
 
-
-
 Route::middleware([Secretaria::class])->prefix('/pagamentos')->group(function () {
 
     Route::get('/', [PagamentoController::class, 'index']);
@@ -122,7 +120,6 @@ Route::middleware([Secretaria::class])->prefix('/pagamentos')->group(function ()
 ##------------------------------------------------------------------------------
 
 ##nivel de acesso pedagogia
-
 Route::middleware([Pedagogia::class])->prefix("/faltas")->group(function () {
 
     Route::view('/', 'main.assiduidades');
@@ -131,6 +128,7 @@ Route::middleware([Pedagogia::class])->prefix("/certificados")->group(function (
 
     Route::get('/', [CertificadosController::class, 'index']);
     Route::get('/{id}', [CertificadosController::class, 'show']);
+    
 });
 Route::middleware([Pedagogia::class])->prefix('/desempenho')->group(function () {
 
@@ -138,7 +136,6 @@ Route::middleware([Pedagogia::class])->prefix('/desempenho')->group(function () 
     Route::get('/{id}', [desempenhoController::class, 'show']);
     Route::post('/criar', [desempenhoController::class, 'create']);
 });
-
 
 #-------------------------------------------------------------------------------
 ##niveis de aceso admin
