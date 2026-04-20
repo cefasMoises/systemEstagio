@@ -38,7 +38,7 @@
 
 
     <header id="header"
-        class="absolute top-0 flex items-center justify-center w-screen h-20 z-40 backdrop-blur shadow-lg bg-slate-800">
+        class="absolute top-0 flex items-center justify-center w-screen h-20 z-40 backdrop-blur shadow-lg bg--800">
 
 
         <div class='ml-10 text-slate-300'>

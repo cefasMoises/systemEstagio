@@ -95,7 +95,7 @@ class EstagiariosController extends Controller
 
         if ($dados->hasFile('documentos')) {
 
-            $path_image = $this->uploadFicheiro($dados->file('documentos'));
+            $path_doc = $this->uploadFicheiro($dados->file('documentos'));
 
         }
 
@@ -146,7 +146,7 @@ class EstagiariosController extends Controller
     {
 
 
-    // return $dados;
+  
 
         $validated = Validator::make($dados->all(), [
             'nome' => ['required', 'string', 'min:3'],
