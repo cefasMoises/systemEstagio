@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotaController;
 use App\Models\Curso;
 use App\Models\Instituto;
 use Illuminate\Support\Facades\Route;
@@ -35,12 +36,8 @@ Route::get('/', [AuthController::class, 'index'])->middleware(UsuarioNaoLogado::
 Route::middleware(UsuarioLogado::class)->group(function () {
 
     Route::get('/sair', [AuthController::class, 'sair']);
-    Route::get('/back', function () {
-
-        return redirect('/panel');
-    });
-
     Route::get('/notifications', [NotificacaoController::class, 'index']);
+
 });
 Route::middleware([UsuarioLogado::class])->prefix('/instrutores')->group(function () {
 
@@ -51,6 +48,7 @@ Route::middleware([UsuarioLogado::class])->prefix('/instrutores')->group(functio
     Route::post('/atualizar', [InstrutorController::class, 'update']);
     Route::get('/deletar/{id}', [InstrutorController::class, 'delete']);
 });
+
 Route::post('/entrar', [AuthController::class, 'entrar'])->middleware(UsuarioNaoLogado::class);
 
 
@@ -175,6 +173,7 @@ Route::middleware([Secretaria::class, UsuarioLogado::class])->prefix('/turmas')-
     Route::post('/enturmar', [TurmaController::class, 'store']);
     Route::get('/deletar/{id}', [TurmaController::class, 'delete']);
 });
+
 Route::middleware([Admin::class, UsuarioLogado::class])->prefix('/planos')->group(function () {
 
     Route::get('/', [PlanoEstagioController::class, 'index']);
@@ -185,6 +184,7 @@ Route::middleware([Admin::class, UsuarioLogado::class])->prefix('/planos')->grou
     Route::post('/atualizar', [PlanoEstagioController::class, 'update']);
     Route::post('/deletar', [PlanoEstagioController::class, 'delete']);
 });
+
 Route::middleware([Admin::class])->prefix('/institutos')->group(function () {
 
     Route::get('/', [InstitutoController::class, 'index']);
@@ -200,12 +200,12 @@ Route::get("/auto", function () {
 
 
 
-    // Curso::create(
-    //     [
-    //         "nome" => "informatica",
-    //         "descricao" => ""
-    //     ]
-    // );
+    Curso::create(
+        [
+            "nome" => "informatica",
+            "descricao" => ""
+        ]
+    );
 
     Instituto::create([
         "nome" => "Instituto politecnico do Bengo",
@@ -216,8 +216,10 @@ Route::get("/auto", function () {
 
     return redirect()->back()->with("sucess", "Auto preenchimento de dados");
 
+});
 
+Route::prefix('/notas')->group(function () {
 
-
-
+    Route::get('/criar/{id}', [NotaController::class, 'create']);
+  
 });

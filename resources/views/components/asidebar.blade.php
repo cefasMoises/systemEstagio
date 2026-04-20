@@ -1,5 +1,5 @@
 <aside id="asidebar"
-    class="transition-all duration-300 ease-in-out max-w-56 w-56 h-full flex flex-col bg-gray-900 text-gray-300 overflow-y-auto p-6">
+    class="transition-all duration-300 ease-in-out max-w-56 w-56 h-full flex flex-col bg-gray-700 text-gray-300 overflow-y-auto p-6">
 
 
     <nav class="mt-20 flex flex-col space-y-8 flex-grow">

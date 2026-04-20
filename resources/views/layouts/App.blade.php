@@ -34,8 +34,9 @@
 <script src="//unpkg.com/alpinejs" defer></script>
 {{-- end --}}
 
-<body class="relative flex w-full h-screen overflow-hidden  bg-slate-800">
-    {{-- first --}}
+<body class="relative flex w-full h-screen overflow-hidden">
+
+
     <header id="header"
         class="absolute top-0 flex items-center justify-center w-screen h-20 z-40 backdrop-blur shadow-lg bg-slate-800">
 
@@ -48,7 +49,7 @@
         <x-logo-mark />
         {{-- end --}}
         <div class="flex  justify-end items-center w-full pr-10 gap-2">
-            <x-bladewind::theme-switcher />
+
             <div class="relative p-2 flex items-center justify-center hover:bg-slate-400/20 rounded">
                 <a href="/notifications" class="flex"><i class="bi bi-bell-fill text-2xl text-slate-400"></i></a>
                 {{-- end --}}
@@ -58,15 +59,13 @@
                         class="size-2 bg-red-500 overflow-hidden p-2 text-sm flex justify-center items-center text-white rounded-full absolute top-2 left-5 animate-bounce">{{ $notificacoes->count() }}</span>
                 @endif
             </div>
-            {{-- end --}}
-            <p class='text-slate-400'>|</p>
-
 
             <a href='/usuarios/'>
-                <div class="relative flex items-center justify-center p-2 rounded-3xl text-slate-500 bg-slate-500/10">
+                <div class="relative flex items-center justify-center p-2 rounded-full text-white bg-gradient-to-r from-indigo-500 to-indigo-600"
+                    title="{{ $user->nome }}">
 
-                    {{-- <i class='bi bi-person-fill'></i> --}}
-                    <h1 class='overflow-hidden font-bold w-full text-center'>{{ $user->nome }}</h1>
+                    <h1 class='font-bold uppercase w-full text-center'>{{ Str::limit($user->nome, 3, '') }}</h1>
+
                     <span class='absolute top-0 size-2 bg-red-500 right-0 rounded-full'><span>
                 </div>
             </a>
@@ -74,8 +73,8 @@
 
         </div>
 
-        <div id='progress' class="absolute bottom-0 h-1 accent-black w-full bg-blue-500 animate-ping hidden "
-            max="100" value="50">
+        <div id='progress' class="absolute bottom-0 h-1 accent-black w-full bg-blue-500 animate-ping hidden " max="100"
+            value="50">
 
 
         </div>
@@ -88,11 +87,11 @@
         {{-- first --}}
 
         <section class=" h-full grow w-full overflow-y-auto">
-        
-                <div class="min-h-screen w-full p-4 ">
-                    @yield('content')
-                </div>
-     
+
+            <div class="min-h-screen w-full p-4 ">
+                @yield('content')
+            </div>
+
         </section>
         {{-- end --}}
 
@@ -108,6 +107,7 @@
                 </div>
             </form>
         </x-bladewind::modal>
+
         {{-- end modal --}}
         <x-bladewind.notification type='sucess' />
         @if (session()->has('sucess'))

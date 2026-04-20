@@ -101,13 +101,13 @@
 
         <!-- Corpo -->
         <div class="content">
-            Certificamos que o(a) aluno(a) <span class="highlight">{{ $aluno->nome }}</span>,
-            portador(a) do número de processo <span class="highlight">{{ $aluno->id }}</span>,
+            Certificamos que o(a) estagiario(a) <span class="highlight">{{ $estagiario->nome }}</span>,
+            portador(a) do número de processo <span class="highlight">{{ $estagiario->id }}</span>,
             concluiu com aproveitamento o curso de
-            <span class="highlight">{{ $aluno->cursos()->first()->nome ?? 'N/A' }}</span>,
+            <span class="highlight">{{ $estagiario->planoEstagio->first()->nome ?? 'N/A' }}</span>,
             ministrado nesta instituição, tendo alcançado a média final de
             <span class="highlight">
-                {{ number_format($aluno->notas()->get()->sum('valor') / max(1, $aluno->notas()->count()), 1) }}
+                {{ number_format($estagiario->notas()->get()->sum('valor') / max(1, $estagiario->notas()->count()), 1) }}
             </span>.
             <br><br>
             Emitimos o presente certificado para os devidos fins legais.

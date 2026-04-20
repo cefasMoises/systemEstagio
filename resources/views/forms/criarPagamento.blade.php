@@ -28,61 +28,58 @@
             </form>
         </x-bladewind::card>
 
-        @if ($estagiario)
-            <div class="">
-                <x-bladewind::card>
-                    <div class="flex items-center justify-center w-full bg-yellow-100 p-4 gap-8">
+    @if ($estagiario)
+        <div>
+            <x-bladewind::card title="resultados da pesquisa">
+                <div class="flex items-center justify-center w-full  p-4 gap-8">
 
 
-                        <div class="size-32 rounded-full overflow-hidden">
-                            <img src="{{ asset("storage/" . $estagiario->foto) }}" alt="foto-aluno"
-                                class="transition-transform hover:scale-110 object-cover ease-in-out cursor-pointer ">
-                        </div>
-                        {{-- end --}}
+                    <div class="size-32 rounded-full overflow-hidden">
+                        <img src="{{ asset('storage/' . $estagiario->foto) }}" alt="foto-aluno"
+                            class="transition-transform hover:scale-110 object-cover ease-in-out cursor-pointer ">
+                    </div>
+                    {{-- end --}}
 
 
+                    <div class="flex flex-col text-slate-700 max-w-lg">
 
-                        <div class="flex flex-col text-slate-700 max-w-lg">
+                        <ul class="flex flex-wrap gap-4">
+                            <li class="flex items-center gap-1 font-bold">Nome:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->nome }}</span></li>
+                            <li class="flex items-center gap-1 font-bold">Nif/numero de bi:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->bi }}</span></li>
+                            <li class="flex items-center gap-1 font-bold">Email:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->email ?? "sem email" }}</span>
+                            </li>
+                            <li class="flex items-center gap-1 font-bold">telefone:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->tel }}</span></li>
+                            <li class="flex items-center gap-1 font-bold">Genero:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->sexo }}</span></li>
+                            <li class="flex items-center gap-1 font-bold">instituto de origem:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->instituto_id }}</span>
+                            </li>
 
-                            <ul class="flex flex-wrap gap-4">
-                                <li class="flex items-center gap-1 font-bold">Nome:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->nome }}</span></li>
-                                <li class="flex items-center gap-1 font-bold">Nif/numero de bi:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->bi }}</span></li>
-                                <li class="flex items-center gap-1 font-bold">Email:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->email ?? "sem email" }}</span>
-                                </li>
-                                <li class="flex items-center gap-1 font-bold">telefone:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->tel }}</span></li>
-                                <li class="flex items-center gap-1 font-bold">Genero:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->sexo }}</span></li>
-                                <li class="flex items-center gap-1 font-bold">instituto de origem:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->instituto_id }}</span>
-                                </li>
+                            <li class="flex items-center gap-1 font-bold">Idade:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ date('Y') - date('Y', strtotime($estagiario->dt_nascimento)) }}</span>
+                            </li>
 
-                                <li class="flex items-center gap-1 font-bold">Idade:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ date('Y') - date('Y', strtotime($estagiario->dt_nascimento)) }}</span>
-                                </li>
+                            <li class="flex items-center gap-1 font-bold">outro documento:<span
+                                    class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->documentos }}</span>
+                            </li>
 
-                                <li class="flex items-center gap-1 font-bold">outro documento:<span
-                                        class="font-normal  bg-yellow-200 p-1 rounded-md">{{ $estagiario->documentos }}</span>
-                                </li>
+                            <li class="flex items-center gap-1 font-bold">codigo do estagiario:<span id="copy-data"
+                                    title="copiar"
+                                    class="font-normal cursor-pointer  bg-green-200 p-1 rounded-md">{{$estagiario->id}}</span>
+                            </li>
 
-                                <li class="flex items-center gap-1 font-bold">codigo do estagiario:<span id="copy-data"
-                                        title="copiar"
-                                        class="font-normal cursor-pointer  bg-green-200 p-1 rounded-md">{{$estagiario->id}}</span>
-                                </li>
-
-                            </ul>
-
-                        </div>
+                        </ul>
 
                     </div>
-                </x-bladewind::card>
-            </div>
-        @endif
 
-    </div>
+                </div>
+            </x-bladewind::card>
+        </div>
+    @endif
 
     <x-bladewind::card title="assuntos / pagamentos">
 
@@ -111,7 +108,7 @@
             <x-bladewind::select label="Metodo de Pagamento" name="metodo" required="true" :data="[['label' => 'Trasnferencia', 'value' => 'ATM'], ['label' => 'Multicaixa', 'value' => 'TPA']]" />
 
             <!-- Método de Pagamento -->
-            <x-bladewind::select label="Sumario" multiple="true"  name="sumarios" required="true" max_selectable="10"
+            <x-bladewind::select label="Sumario" multiple="true" name="sumarios" required="true" max_selectable="10"
                 data="{{ json_encode($summary_payments) }}" />
 
 

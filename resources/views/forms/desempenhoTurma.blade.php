@@ -6,9 +6,9 @@
             type='secondary' />
 
         <x-bladewind::card>
-            <form action="/desempenho/criar" method="POST">
-                @csrf
 
+            <form action="/desempenho/criar" method="post">
+                @csrf
                 <x-bladewind::table>
                     <x-slot name='header'>
                         <tr>
@@ -31,27 +31,41 @@
                             $media = $notas->count() > 0 ? $somaNotas / $notas->count() : 0;
                         @endphp
 
-                        <tr>
+                        <tr class="hover:bg-slate-200">
+
                             <td>{{ $estagiario->id }}</td>
+
                             <td>{{ $estagiario->nome }}</td>
 
                             @foreach ($notas as $nota)
                                 <td>
-                                    <input
-                                        type="number"
-                                        step="0.01"
-                                        min="0"
-                                        max="20"
-                                        name="notas[{{ $nota->id }}]"
-                                        value="{{ $nota->valor }}"
-                                        style="width: 50px; font-size: 13px; border: none;"
-                                        class="rounded text-blue-500 cursor-pointer"
-                                    />
+                                    <input type="number" step="0.01" min="0" max="20" name="notas[{{ $nota->id }}]"
+                                        value="{{ $nota->valor }}" style="width: 50px; font-size: 13px; border: none;"
+                                        class="rounded text-blue-500 cursor-pointer" />
                                 </td>
                             @endforeach
 
                             <td>{{ number_format($media, 1) }}</td>
-                            <td></td>
+
+                            @if ($notas->count() == 0)
+                                <td colspan="2">
+                                    <form action="/notas/criar" method="post">
+                                        @csrf
+                                        <input type="hidden" name="estagiario_id" value="{{ $estagiario->id }}" />
+
+                                        <x-bladewind::button title="adicionar nota" can_submit='true'
+                                            icon="plus-circle">nova</x-bladewind::button>
+                                    </form>
+                                </td>
+
+                            @else
+                                <td>
+                                    <a href="/notas/criar/{{ $estagiario->id }}"
+                                        class="flex items-center justify-center gap-1 border-dotted border-2 text-blue-500 border-blue-500 p-2"
+                                        title="adicionar nova nota">add</a>
+                                </td>
+                            @endif
+
                         </tr>
                     @endforeach
 
