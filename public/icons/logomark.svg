@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="logomark.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.59040654"
+     inkscape:cx="775.73666"
+     inkscape:cy="424.28392"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g172"
+       transform="matrix(1.2633208,0,0,1.2633208,-66.618315,-109.51754)">
+      <path
+         style="fill:#87cdde"
+         d="M 230.34975,437.00026 120.25612,413.27455 62.405398,397.7735 325.79,245.70833 392.94958,281.1622 Z"
+         id="path172"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         style="fill:#5599ff"
+         d="M 230.34975,436.98703 149.04984,259.14347 338.74963,191.39354 421.74329,323.5059 Z"
+         id="path171" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:354.949px;font-family:'MS UI Gothic';-inkscape-font-specification:'MS UI Gothic';writing-mode:lr-tb;direction:ltr;fill:#1c2224;stroke-width:1.84869"
+         x="66.465988"
+         y="385.68866"
+         id="text170"><tspan
+           sodipodi:role="line"
+           id="tspan170"
+           x="66.465988"
+           y="385.68866"
+           style="fill:#1c2224;stroke-width:1.84869">G</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:416.257px;font-family:'MS UI Gothic';-inkscape-font-specification:'MS UI Gothic';writing-mode:lr-tb;direction:ltr;fill:#1c2224;stroke-width:2.168"
+         x="217.44852"
+         y="432.16971"
+         id="text171"><tspan
+           sodipodi:role="line"
+           id="tspan171"
+           x="217.44852"
+           y="432.16971"
+           style="fill:#1c2224;stroke-width:2.168">S</tspan></text>
+    </g>
+  </g>
+</svg>

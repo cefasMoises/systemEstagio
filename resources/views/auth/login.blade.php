@@ -3,7 +3,6 @@
 
     <div class="relative flex flex-col w-full items-center justify-center h-full  bg-slate-200 gap-4">
         {{-- end --}}
-   
 
         @if (session()->has('error'))
             <div class='w-md'>
@@ -11,6 +10,14 @@
             </div>
         @endif
         <!-- end -->
+
+
+
+        <div class="flex flex-col justify-center items-center ">
+            <img src="{{ asset('icons/logomark.svg') }}" alt="logo-mark" class="size-32">
+        
+            <h1 class="text-xl text-gray-600">Gestão e estagios</h1>
+        </div>
 
         <form
             class="flex flex-col justify-center gap-4 min-h-32 min-w-96 z-10 bg-white backdrop-blur p-8 rounded-md shadow-sm"
@@ -20,6 +27,8 @@
 
 
             {{-- end --}}
+
+
 
             <div class="flex flex-col">
 

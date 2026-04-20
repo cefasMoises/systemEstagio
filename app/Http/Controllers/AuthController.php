@@ -21,6 +21,7 @@ class AuthController extends Controller
 {
     public function index()
     {
+
         return view('auth.login');
     }
 
@@ -64,7 +65,7 @@ class AuthController extends Controller
                 session(['acesso' => $usuario->acesso]);
                 Cookie('user', $usuario->id, 24 * 60 * 60);
 
-              
+
                 return redirect('/panel/');
 
             } else {
@@ -76,8 +77,6 @@ class AuthController extends Controller
             return redirect('/')->with('error', MessagesErrorAuth::CREDENCIAIS_INVALIDAS->value);
         }
     }
-
-
     public function sair()
     {
 
@@ -89,13 +88,13 @@ class AuthController extends Controller
 
             if (session()->has('user_id')) {
 
-                $usuario->estatus = 'OFF';
-                $usuario->update();
+
                 session()->flush();
 
                 return redirect('/');
             }
         }
     }
-} {
+
+
 }
