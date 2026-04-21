@@ -37,7 +37,7 @@
                         <td>{{ $pagamento->created_at->format('d-m-Y') }}</td>
 
 
-                        <td><x-bladewind::button onclick="showModal('{{ $pagamento->id }}')"><i
+                        <td><x-bladewind::button onclick="showModal('{{ $pagamento->id }}')" title="dados de pagamentos"><i
                                     class="bi bi-file-text"></i></x-bladewind::button></td>
 
 

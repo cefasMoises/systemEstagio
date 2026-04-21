@@ -16,7 +16,7 @@
         <div class="flex flex-col justify-center items-center ">
             <img src="{{ asset('icons/logomark.svg') }}" alt="logo-mark" class="size-32">
         
-            <h1 class="text-xl text-gray-600">Gestão e estagios</h1>
+            <h1 class="text-xl text-gray-600">Gestão de estagios</h1>
         </div>
 
         <form

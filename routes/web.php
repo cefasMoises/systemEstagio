@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\NotaController;
 use App\Models\Curso;
+use App\Models\Estagiario;
 use App\Models\Instituto;
 use Illuminate\Support\Facades\Route;
 // end init
@@ -55,7 +56,7 @@ Route::post('/entrar', [AuthController::class, 'entrar'])->middleware(UsuarioNao
 
 Route::middleware(UsuarioLogado::class)->get('/panel', function () {
 
-    $registrosPorMes = Aluno::selectRaw('MONTH(created_at) as mes, COUNT(*) as total')
+    $registrosPorMes = Estagiario::selectRaw('MONTH(created_at) as mes, COUNT(*) as total')
         ->whereYear('created_at', date('Y'))
         ->groupBy('mes')
         ->orderBy('mes')
@@ -68,8 +69,8 @@ Route::middleware(UsuarioLogado::class)->get('/panel', function () {
         "labels" => ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
         "datasets" => [
             [
-                'type' => 'bar',
-                'label' => 'Alunos',
+                'type' => '',
+                'label' => 'Estagiarios',
                 'data' => $dadosMeses,
                 'backgroundColor' => 'rgba(54, 162, 235, 0.2)',
                 'borderColor' => 'rgb(75, 192, 192)',
@@ -79,8 +80,8 @@ Route::middleware(UsuarioLogado::class)->get('/panel', function () {
     ];
 
     $turmas = App\Models\Turma::count();
-    $cursos = App\Models\Curso::count();
-    $alunos = App\Models\Aluno::count();
+    $cursos = App\Models\PlanoEstagio::count();
+    $alunos = App\Models\Estagiario::count();
 
     $instrutores = App\Models\Instrutor::count();
 

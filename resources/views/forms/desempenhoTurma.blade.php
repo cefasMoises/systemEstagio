@@ -49,13 +49,9 @@
 
                             @if ($notas->count() == 0)
                                 <td colspan="2">
-                                    <form action="/notas/criar" method="post">
-                                        @csrf
-                                        <input type="hidden" name="estagiario_id" value="{{ $estagiario->id }}" />
-
-                                        <x-bladewind::button title="adicionar nota" can_submit='true'
-                                            icon="plus-circle">nova</x-bladewind::button>
-                                    </form>
+                                    <a href="/notas/criar/{{ $estagiario->id }}"
+                                        class="flex items-center justify-center gap-1 border-dotted border-2 text-blue-500 border-blue-500 p-2"
+                                        title="adicionar nova nota">add</a>
                                 </td>
 
                             @else

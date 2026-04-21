@@ -6,7 +6,7 @@
     {{-- Estatísticas principais --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
         <x-bladewind::card has_shadow="true" class="flex flex-col items-center justify-center p-6">
-            <x-bladewind::statistic number="{{ $alunos }}" label="Total Alunos">
+            <x-bladewind::statistic number="{{ $alunos }}" label="Total Estagiarios">
                 <x-slot name="icon">
                     <i class="bi bi-people-fill text-3xl text-gray-600"></i>
                 </x-slot>
@@ -14,7 +14,7 @@
         </x-bladewind::card>
 
         <x-bladewind::card has_shadow="true" class="flex flex-col items-center justify-center p-6">
-            <x-bladewind::statistic number="{{ $cursos }}" label="Total Cursos">
+            <x-bladewind::statistic number="{{ $cursos }}" label="Total Planos de Estágio">
                 <x-slot name="icon">
                     <i class="bi bi-collection-fill text-3xl text-gray-600"></i>
                 </x-slot>
